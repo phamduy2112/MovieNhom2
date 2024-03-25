@@ -1,10 +1,13 @@
 import React from 'react'
-
-export function Input() {
+import S from './Input.module.css';
+export function Input(props) {
+    const {name,...props1}=props
   return (
-    <div>
-      sadasd
+    <div className={`${S.groupForm}`}>
+        <label htmlFor="">{name}</label>
+    <input {...props1}/>
     </div>
   )
 }
+
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import S from "./Header.module.css";
+import { SButtonPrimary } from '../Style/Button';
 type TNavLinkProps={
     isActive:boolean;
 
@@ -28,9 +29,12 @@ export function Header() {
             </div>
         
       <div className='flex gap-3'>
-        <NavLink to={"/login"} className={`${S.link}`} style={activeNavLink}>Đăng nhập</NavLink>
-        <NavLink to={"/register"} className={`${S.link}`} style={activeNavLink}>Đăng kí</NavLink>
-        
+        <NavLink to={"/register"} className={`${S.btnSuccessW}`} >Đăng kí</NavLink>
+                <NavLink to={"/login"} >
+                    <SButtonPrimary width={'120px'} height={40} border={2}>Đăng nhập</SButtonPrimary>
+
+                </NavLink>
+
         </div>  
         </div>
         

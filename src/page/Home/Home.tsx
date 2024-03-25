@@ -1,9 +1,10 @@
 import React from 'react'
+import { CarouSel } from './carousel/carousel'
 
 function Home() {
   return (
     <div>
-       <p className='text-center'>asdasd</p>
+      <CarouSel/>
     </div>
   )
 }
