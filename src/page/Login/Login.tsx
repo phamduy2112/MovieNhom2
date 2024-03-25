@@ -16,22 +16,22 @@ export default function Login() {
       <h3 className='text-center'>Đăng nhập</h3>
       <p className='text-center'>Chào mừng bạn trở lại</p>
           <form>
-            <Input name="Email" type="text"/>
-            <Input name="Password" type="password"/>
-            <NavLink to={'/'} className='block mb-4 text-right'>Quên mật khẩu?</NavLink>
+            <Input name="Tài Khoản" type="text"/>
+            <Input name="Mật Khẩu" type="password"/>
+            <NavLink to={''} className='block mb-4 text-right'>Quên mật khẩu?</NavLink>
           
             <SButtonPrimary width={'100%'} height={40} border={2} type='submit'>Đăng nhập ngay</SButtonPrimary>
           </form>
             <h5 className='text-center my-5'>OR</h5>
             <div className='flex gap-6'>
-              <SButtonPrimary width={'50%'} height={40} border={1}>
+              <SButtonPrimary width={'50%'} height={40} border={1} background='blue'>
       <div className='flex content-center justify-center gap-3 text-center'>
                <FaFacebookF className='self-center' />
                 Đăng nhập facebook
       </div>
        
               </SButtonPrimary>
-              <SButtonPrimary width={'50%'} height={40} border={1}>
+              <SButtonPrimary width={'50%'} height={40} border={1} background='orange'>
               <div className='flex content-center justify-center gap-3 text-center'>
                <FaGoogle className=' self-center'/>
                 Đăng nhập google
