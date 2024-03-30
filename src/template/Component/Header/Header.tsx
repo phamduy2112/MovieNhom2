@@ -31,7 +31,7 @@ export function Header() {
       <div className='flex gap-3'>
         <NavLink to={"/register"} className={`${S.btnSuccessW}`} >Đăng kí</NavLink>
                 <NavLink to={"/login"} >
-                    <SButtonPrimary width={'120px'} height={40} border={2}>Đăng nhập</SButtonPrimary>
+                    <SButtonPrimary width={'120px'} height={40} borderRadius={2}>Đăng nhập</SButtonPrimary>
 
                 </NavLink>
 

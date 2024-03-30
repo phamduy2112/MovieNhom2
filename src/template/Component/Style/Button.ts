@@ -5,8 +5,9 @@ import styled from "styled-components";
 type Button={
     width:string,
     height?:number,
-    border:number,
+    borderRadius:number,
     background?:string,
+    border?:string
 }
 export const SButtonPrimary =styled.button<Button>`
     width: ${props=>props.width };
@@ -15,6 +16,7 @@ export const SButtonPrimary =styled.button<Button>`
     text-align: center;
     font-size: 1.7rem;
     line-height: 3.9rem;
-    border-radius: ${props=>props.border}rem;
-
+    border-radius: ${props=>props.borderRadius}rem;
+    /* border:1px solid ${props=>props.border}; */
+    
 `
