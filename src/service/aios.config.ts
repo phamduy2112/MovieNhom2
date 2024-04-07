@@ -1,6 +1,7 @@
 import axios from "axios";
-import { BASE_URL } from "../constants";
+import { ACCESS_TOKEN, BASE_URL } from "../constants";
 import { tokenCybersoft } from '../constants/index';
+import { getLocalStorage } from "../utils";
 
 export const axiosWithoutAuth=axios.create({
     baseURL:`${BASE_URL}/api/`,
@@ -8,7 +9,8 @@ export const axiosWithoutAuth=axios.create({
 })
 axiosWithoutAuth.interceptors.request.use(
     (config)=>{
-        config.headers.TokenCybersoft =tokenCybersoft
+        config.headers.TokenCybersoft =tokenCybersoft;
+        config.headers.Authorization = `Bearer ${getLocalStorage(ACCESS_TOKEN)}`;
         return config
     },
     (e)=>{

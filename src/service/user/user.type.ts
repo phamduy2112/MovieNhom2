@@ -1,0 +1,9 @@
+type TPayloadSignup = {
+    taiKhoan: string,
+    matKhau: string,
+    email: string,
+    soDt: string,
+    hoTen: string
+};
+
+type TPayloadSignin = Pick<TPayloadSignup, "taiKhoan" | "matKhau">;

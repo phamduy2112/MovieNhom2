@@ -7,8 +7,8 @@ import S from "./userLR.module.css";
 import { useFormikHook } from "../../Hooks/useFormikHook";
 
 export default function Register() {
-    const [{ touched, errors }, { handleSubmit, getFieldProps }] =
-        useFormikHook();
+    const [{ touched, errors}, { handleSubmit, getFieldProps }] =
+        useFormikHook('signup');
     return (
         <div className={`${S.login}`}>
             <h3 className="text-center">Đăng Kí</h3>
