@@ -5,7 +5,7 @@ export const getProduct=async()=>{
         const resp=await axiosWithoutAuth('QuanLyPhim/LayDanhSachPhim?maNhom=GP04');
         const data=resp.data;
         return data
-    }catch(e){
+    }catch(e:any){
         throw new Error(e);
     }
 }
