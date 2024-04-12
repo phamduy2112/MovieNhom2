@@ -18,14 +18,12 @@ import {
     getFilmInfoThunk,
     updateFilmThunk,
 } from "../../../redux/admin/quanLyPhim.slice";
-import { useParams } from "react-router-dom";
-import { TfilmInfo } from "./editFilm.type";
+import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
-import customParseFormat from 'dayjs/plugin/customParseFormat';
+import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
 type Props = {};
 type SizeType = Parameters<typeof Form>[0]["size"];
-
 const EditFilm = (props: Props) => {
     const { id } = useParams();
     useEffect(() => {
@@ -34,11 +32,14 @@ const EditFilm = (props: Props) => {
             console.log("useffect");
         }
     }, []);
+
+
     const dispatch = useAppDispatch();
     const filmInfo: any = useAppSelector(
         (state) => state.QuanLyPhimReducer.filmInfo,
     );
     const [imgSrc, setImgSrc] = useState("");
+    const navigate =useNavigate()
     console.log(filmInfo.hinhAnh);
     const { handleSubmit, setFieldValue, handleChange, values } = useFormik({
         enableReinitialize: true,
@@ -57,11 +58,13 @@ const EditFilm = (props: Props) => {
         onSubmit: (values: FormikValues) => {
             console.log(values);
             values.maNhom = GROUP_ID;
-            if((values.dangChieu && values.sapChieu) || (!values.dangChieu && !values.sapChieu)){
-                alert('Chọn 1 trong 2: đang chiếu hoặc sắp chiếu')
+            if (
+                (values.dangChieu && values.sapChieu) ||
+                (!values.dangChieu && !values.sapChieu)
+            ) {
+                alert("Chọn 1 trong 2: đang chiếu hoặc sắp chiếu");
                 return;
             }
-
 
             //Biến đổi json thành formdata
             let formData = new FormData();
@@ -70,11 +73,13 @@ const EditFilm = (props: Props) => {
                     formData.append(
                         key,
                         key === "ngayKhoiChieu"
-                            ? dayjs(values[key]).format('DD/MM/YYYY')
-                            : values[key] ,
+                            ? dayjs(values[key]).format("DD/MM/YYYY")
+                            : values[key],
                     );
                 } else {
+                    console.log("first", values.hinhAnh);
                     if (values.hinhAnh !== null) {
+                        console.log("submit", values.hinhAnh);
                         formData.append(
                             key,
                             values.hinhAnh,
@@ -84,11 +89,12 @@ const EditFilm = (props: Props) => {
                 }
                 //log dữ liệu của đôi tượng formData(bình thường không thể console.log formData ra không thông thường vì dữ liệu trong forrmData có tính bảo mật)
                 console.log(key, formData.get(key));
-                dispatch(updateFilmThunk(formData))
+                dispatch(updateFilmThunk(formData));
+                navigate('/admin/films')
             }
-
         },
     });
+
     const handleChangeInput = (e: any) => {
         let { name, value } = e.target;
         setFieldValue(name, value);
@@ -123,9 +129,9 @@ const EditFilm = (props: Props) => {
     const handleChangeInputFile = async (e: any) => {
         if (e.target.files.length > 0) {
             let file = e.target.files[0];
-            console.log(file);
             await setFieldValue("hinhAnh", file);
-            console.log(12345677);
+            console.log('inner',values.hinhAnh) // Giá trị cũ
+
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = async (e: any) => {
@@ -133,7 +139,7 @@ const EditFilm = (props: Props) => {
             };
         }
     };
-
+    console.log('outer',values.hinhAnh) //Giá trị đã cập nhật
     return (
         <>
             <h3 className="mb-5 text-center text-[20px] font-bold">
@@ -252,3 +258,5 @@ const EditFilm = (props: Props) => {
 };
 
 export default EditFilm;
+
+

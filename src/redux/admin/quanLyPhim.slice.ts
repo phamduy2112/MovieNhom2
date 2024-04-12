@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getProduct, layThongTinPhim, themPhimUpLoadHinh, updateFilm } from "../../service";
+import { useNavigate } from "react-router-dom";
 
 export const getFilmsThunk = createAsyncThunk("getFilmsThunk", async () => {
     try {
@@ -24,7 +25,7 @@ export const getFilmInfoThunk = createAsyncThunk(
 );
 
 
-export const addFilmThunk = createAsyncThunk("", async (formData: FormData) => {
+export const addFilmThunk = createAsyncThunk("addFilmThunk", async (formData: FormData) => {
     try {
         const result = await themPhimUpLoadHinh(formData);
         console.log("result", result.data.content);
@@ -33,10 +34,12 @@ export const addFilmThunk = createAsyncThunk("", async (formData: FormData) => {
     }
 });
 
-export const updateFilmThunk = createAsyncThunk("", async (formData: FormData) => {
+export const updateFilmThunk = createAsyncThunk("updateFilmThunk", async (formData: FormData) => {
   try {
       const result = await updateFilm(formData);
       console.log("update", result.data.content);
+      
+      
   } catch (e: any) {
       console.log(e.response?.data);
   }

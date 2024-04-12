@@ -78,7 +78,7 @@ const CreateFilm = (props: Props) => {
             let file = e.target.files[0];
             console.log(file);
             await setFieldValue("hinhAnh", file);
-
+           
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = async (e: any) => {
