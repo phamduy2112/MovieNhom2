@@ -8,23 +8,32 @@ import IconTheater from '../Home/CumRap/IconTheater/iconTheater';
 import { converToDetailProduct, converToTheaterDetailProduct } from './Helper';
 
 import { getDetailTheaterProduct } from '../../service/DetailProdudct/DetailProduct.service';
-import { THeThongRapChieu } from '../../service/DetailProdudct/DetailProduct.type';
+import { THeThongRapChieu, TLichChieu } from '../../service/DetailProdudct/DetailProduct.type';
 
 function ProductDetails(props) {
     const { productID } = useParams();
     const [movieDetail,setMovieDetail]=useState<TProduct[]>([]);
-    const [movieTheaterDetail,setMovieTheaterDetail]=useState<THeThongRapChieu[]>([]);
+    const [tenRap,setTenRap] = useState("unknown");
+    const [movieTheaterDetail,setMovieTheaterDetail]=useState<TLichChieu>({});
+    // const [movieTheaterDetail,setMovieTheaterDetail]=useState<any[]>([]);
+
     useEffect(()=>{
       IIFE(async()=>{
         try{
+      
           const data=await getDetailProduct(productID);
           const dataTheater=await getDetailTheaterProduct(productID);
+          
           if(data?.message==='Xử lý thành công!'){
-            const content=data.content;
-            const contentTheater=dataTheater.content;
-            
-            setMovieTheaterDetail(converToTheaterDetailProduct(contentTheater))
-           
+            // const content=data.content;
+            const contentTheater:TLichChieu =dataTheater.content;
+         
+            console.log("data convert: ",converToTheaterDetailProduct(contentTheater));
+            // setMovieTheaterDetail(converToTheaterDetailProduct(contentTheater))
+            setMovieTheaterDetail(contentTheater)
+            if(contentTheater.heThongRapChieu[0]){
+              setTenRap(contentTheater.heThongRapChieu[0].cumRapChieu[0].tenCumRap);
+            }
           }
         }catch(e){
           console.log(e);
@@ -32,9 +41,10 @@ function ProductDetails(props) {
         }
       })
     },[productID])
-    console.log(movieTheaterDetail);
-    
+    // console.log(movieTheaterDetail);
+    console.log("Data final", {movieTheaterDetail});
   return (
+    
     <div className="container">
         <div className='p-11' style={{filter:'blur(8px)', height:'350px', background:`url(${movieTheaterDetail.hinhAnh})`,backgroundSize:'cover',backgroundPosition:'center'}}>
        
@@ -89,7 +99,10 @@ function ProductDetails(props) {
                     </div>
                     <div className="theater-text">
                       {/* <h3 className='text-2xl'>{movieTheaterDetail.heThongRapChieu[0].cumRapChieu[0].tenCumRap}</h3> */}
-                      <p className='text-xl'>{movieTheaterDetail.heThongRapChieu[0].cumRapChieu[0].diaChi}</p>
+                      {/* <p className='text-xl'>{movieTheaterDetail?.heThongRapChieu[0].cumRapChieu[0].diaChi}</p> */}
+                      {/* Phần này bạn bị lỗi do nó không hiểu được movieTheaterDetail?.heThongRapChieu[0] do bạn đang để sai kiểu dữ liệu, đây phải là object bạn cứ so sánh lại với code cũ và đồng thời bạn check lại cho mình kiểu dữ liệu TLichChieu, thứ 2 do API cái phần heThongRapChieu API nó trả về mảng rỗng nên phần này bạn làm toán tử 3 ngôi nếu nó undefine thì render ra unknown cho đỡ bị báo lỗi, mà lỗi nguồn gốc do bạn định nghĩa sai kiểu dữ liệu cho movieTheaterDetail. Và phần converToTheaterDetailProduct là mình cảm thấy không cần thiết vì data sau khi được convert vẫn không mấy thay đổi data vẫn giữ nguyên và bạn chỉ nhóm lại các data cũ vào 1 thuộc tính thì với mình điều này không cần thiết mà còn làm code phức tạp, chiếm thêm bộ nhớ khi phải viết hàm rồi định nghĩa thêm kiểu dữ liệu vào nữa. Bạn kéo api về, api trả về data thì bạn cứ đem đi dùng như bình thường là được. Còn lại thì do lỗi nó bắt nguồn từ kiểu dữ liệu và phần code ở các dòng từ dòng 19 - 38 của file này, bạn check lại đối chiếu nhé.  */}
+                      {/* <p className='text-xl'>{movieTheaterDetail?.heThongRapChieu?.length != 0 ? "Identify" :"UnKnown"}</p> */}
+                      <p className='text-xl'>{tenRap}</p>
                     </div>
 
                     </div>
