@@ -5,6 +5,7 @@ import Login from "../page/Login/Login";
 import Register from "../page/Register/Register";
 import Movies from "../page/movies/Movies";
 import { Profile } from "../page/Profile/profile";
+import ProductDetails from "../page/productDetails/productDetails";
 
 export const router = createBrowserRouter([
   {
@@ -16,8 +17,8 @@ export const router = createBrowserRouter([
 
       },
       {
-        path:'/movies',
-        element:<Movies />
+        path:'/detail/:productID',
+        element:<ProductDetails />
       },
       {
         path:'/login',

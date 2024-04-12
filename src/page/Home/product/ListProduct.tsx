@@ -26,11 +26,13 @@ export function ListHomeProduct(props:Props){
      
 {
     
-  props.movie.slice(0,8).map((item)=>{
+  props.movie.slice(0,8).map((item:TProduct)=>{
     const typeMovie= props.type ? item.dangChieu:item.sapChieu
     if(typeMovie){
       return (
         <CartItem 
+         
+        maPhim={item.maPhim}
        tenPhim={item.tenPhim}
        hinhAnh={item.hinhAnh}
        ngayKhoiChieu={item.ngayKhoiChieu}

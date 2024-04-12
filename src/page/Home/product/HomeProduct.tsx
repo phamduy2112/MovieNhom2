@@ -9,12 +9,12 @@ import { SButtonPrimary } from '../../../template/Component/Style/Button';
 
 export function HomeProduct() {
   const [movie,setMovie]=useState<TProduct[]>([]);
-  const [type,setType]=useState(
-true
+  const [type,setType]=useState(true);
+  const [active,setActive]=useState({
+    dangChieu:true,
+    sapChieu:false
+  })
 
-
-   
-);
   useEffect(()=>{
     IIFE(async ()=>{
       try{
@@ -37,18 +37,38 @@ console.log(type);
 
 // <ListHomeProduct movie={movie} type={type}></ListHomeProduct>
 //   },[movie])
+const  backgroundDC=active.dangChieu ?"linear-gradient(210deg,#fe6969,#e30713)" :"black"; 
+const  backgroundSC=active.sapChieu ?"linear-gradient(210deg,#fe6969,#e30713)" :"black" ;
   return (
     <div className='container'>
         <div className='flex my-3'>
             
-           <SButtonPrimary width='150px' border={0} background='black' onClick={()=>{
-            setType(true)
-           }}>Phim Đang Chiếu</SButtonPrimary>
-           <SButtonPrimary width='150px' border={0} background='black'  onClick={()=>{
-            setType(
-           false
-          )
-           }}>Phim Sắp Chiếu</SButtonPrimary>
+           <SButtonPrimary width='150px' border={0} 
+           background={backgroundDC}
+           onClick={()=>{
+            setType(true),
+            setActive(
+              {
+                dangChieu:true,
+                sapChieu:false
+              }
+            )
+           }
+           
+           }>Phim Đang Chiếu</SButtonPrimary>
+           <SButtonPrimary width='150px' border={0}  
+           background={backgroundSC}
+           onClick={()=>{
+            setType(false),
+            setActive(
+              {
+                dangChieu:false,
+                sapChieu:true
+              }
+            )
+           }
+           
+           }>Phim Sắp Chiếu</SButtonPrimary>
 
 
         </div>
