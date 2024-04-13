@@ -17,8 +17,10 @@ function ProductDetails(props) {
     useEffect(()=>{
       IIFE(async()=>{
         try{
+      
           const data=await getDetailProduct(productID);
           const dataTheater=await getDetailTheaterProduct(productID);
+          
           if(data?.message==='Xử lý thành công!'){
        
             const contentTheater=dataTheater.content;
@@ -32,9 +34,10 @@ function ProductDetails(props) {
         }
       })
     },[productID])
-    console.log(movieTheaterDetail);
-    
+    // console.log(movieTheaterDetail);
+    console.log("Data final", {movieTheaterDetail});
   return (
+    
     <div className="container">
         <div className='p-11' style={{filter:'blur(8px)', height:'350px', background:`url(${movieTheaterDetail?.hinhAnh})`,backgroundSize:'cover',backgroundPosition:'center'}}>
        
