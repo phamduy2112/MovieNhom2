@@ -8,19 +8,19 @@ import IconTheater from '../Home/CumRap/IconTheater/iconTheater';
 import { converToDetailProduct, converToTheaterDetailProduct } from './Helper';
 
 import { getDetailTheaterProduct } from '../../service/DetailProdudct/DetailProduct.service';
-import { THeThongRapChieu } from '../../service/DetailProdudct/DetailProduct.type';
+import { TLichChieu } from '../../service/DetailProdudct/DetailProduct.type';
 
 function ProductDetails(props) {
     const { productID } = useParams();
-    const [movieDetail,setMovieDetail]=useState<TProduct[]>([]);
-    const [movieTheaterDetail,setMovieTheaterDetail]=useState<THeThongRapChieu[]>([]);
+  
+    const [movieTheaterDetail,setMovieTheaterDetail]=useState<TLichChieu[]>([]);
     useEffect(()=>{
       IIFE(async()=>{
         try{
           const data=await getDetailProduct(productID);
           const dataTheater=await getDetailTheaterProduct(productID);
           if(data?.message==='Xử lý thành công!'){
-            const content=data.content;
+       
             const contentTheater=dataTheater.content;
             
             setMovieTheaterDetail(converToTheaterDetailProduct(contentTheater))
@@ -36,22 +36,22 @@ function ProductDetails(props) {
     
   return (
     <div className="container">
-        <div className='p-11' style={{filter:'blur(8px)', height:'350px', background:`url(${movieTheaterDetail.hinhAnh})`,backgroundSize:'cover',backgroundPosition:'center'}}>
+        <div className='p-11' style={{filter:'blur(8px)', height:'350px', background:`url(${movieTheaterDetail?.hinhAnh})`,backgroundSize:'cover',backgroundPosition:'center'}}>
        
     </div>
     <div className=" detailProduct w-[1000px] mx-auto mt-28" style={{position:'absolute',top:'14%',left:'25%',transform:'translate(0%,-50%)'}}>
             <div className="flex gap-4" >
               <div className="detailProduct-left w-[500px]">
 
-            <img src={movieTheaterDetail.hinhAnh} alt="" style={{width:'100%', height:'200px'}}/>
+            <img src={movieTheaterDetail?.hinhAnh} alt="" style={{width:'100%', height:'200px'}}/>
 
             </div>
             <div className="detailProduct-right">
-              <h3 className="name text-4xl">{movieTheaterDetail.tenPhim}</h3>
+              <h3 className="name text-4xl">{movieTheaterDetail?.tenPhim}</h3>
               <div className="time text-2xl">120 phút - 10 Tix - 2D/Digital</div>
-              <div className="timeDay text-2xl">Khởi Chiếu:{movieTheaterDetail.ngayKhoiChieu}</div>
+              <div className="timeDay text-2xl">Khởi Chiếu:{movieTheaterDetail?.ngayKhoiChieu}</div>
               <div className="title text-2xl">
-              Mô tả:{movieTheaterDetail.moTa}
+              Mô tả:{movieTheaterDetail?.moTa}
               </div>
               <div className="flex gap-3">
                 <button>Xem Chi Tiết</button>
@@ -89,7 +89,7 @@ function ProductDetails(props) {
                     </div>
                     <div className="theater-text">
                       {/* <h3 className='text-2xl'>{movieTheaterDetail.heThongRapChieu[0].cumRapChieu[0].tenCumRap}</h3> */}
-                      <p className='text-xl'>{movieTheaterDetail.heThongRapChieu[0].cumRapChieu[0].diaChi}</p>
+                      <p className='text-xl'>{movieTheaterDetail?.heThongRapChieu[0].cumRapChieu[0].diaChi}</p>
                     </div>
 
                     </div>
