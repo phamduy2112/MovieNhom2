@@ -9,6 +9,7 @@ import AdminTemplate from "../template/admin/AdminTemplate";
 import Films from "../page/Admin/films/Films";
 import CreateFilm from "../page/Admin/create-film/CreateFilm";
 import EditFilm from "../page/Admin/edit-film/EditFilm";
+import CreateShowTime from "../page/Admin/create-showtime/CreateShowTime";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
       {
         path: 'editfilm/:id',
         element: <EditFilm/>
+      },
+      {
+        path: 'showtime/:id/:tenphim',
+        element: <CreateShowTime/>
       }
     ]
   }

@@ -26,3 +26,9 @@ export const updateFilm = (payload: FormData) => {
         data: payload,
     });
 };
+
+export const deleteFilm = (maPhim:string|number) => {
+    return axiosWithoutAuth(`/QuanLyPhim/XoaPhim/?MaPhim=${maPhim}`,{
+        method: 'delete',
+    })
+}

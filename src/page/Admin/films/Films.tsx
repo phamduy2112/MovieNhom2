@@ -3,13 +3,14 @@ import React, { useEffect } from "react";
 type Props = {};
 
 import { Table, Input, Button } from "antd";
-import { AudioOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { CalendarOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import type { TableColumnsType, TableProps } from "antd";
 import type { SearchProps } from "antd/es/input/Search";
 import { IoSearchOutline } from "react-icons/io5";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { getFilmsThunk } from "../../../redux/admin/quanLyPhim.slice";
+import { deleteFilmThunk, getFilmsThunk } from "../../../redux/admin/quanLyPhim.slice";
 import { NavLink, useNavigate } from "react-router-dom";
+
 
 const { Search } = Input;
 
@@ -20,13 +21,17 @@ function Films({}: Props) {
     );
     const dispatch = useAppDispatch();
     useEffect(() => {
-        dispatch(getFilmsThunk());
+        dispatch(getFilmsThunk(''));
     }, []);
 
     console.log({ arrFilmDefault });
 
-    const onSearch: SearchProps["onSearch"] = (value, _e, info) =>
+    const onSearch: SearchProps["onSearch"] = (value, _e, info) =>{
         console.log(info?.source, value);
+        //Gọi api lấy danh sách phim
+        dispatch(getFilmsThunk(value))
+
+    }
 
     interface DataType {
         key: React.Key;
@@ -110,11 +115,19 @@ function Films({}: Props) {
             render: (text, film) => {
                 return (
                     <>
-                        <NavLink className={"bg-yellow-500 text-white mr-3 text-[30px] rounded-lg"} to={`/admin/editfilm/${film.maPhim}`}>
+                        <NavLink className={" text-yellow-500 mr-3 text-[30px]"} to={`/admin/editfilm/${film.maPhim}`}>
                             <EditOutlined />
                         </NavLink>
-                        <NavLink className={"bg-red-500 text-white text-[30px] rounded-lg"} to={"/"}>
+                        <span className={" text-red-500 text-[30px] cursor-pointer mr-3"} onClick={() =>{
+                            if(window.confirm('Bạn có muốn xoá phim '+ film.tenPhim + "?")){
+                                dispatch(deleteFilmThunk(film.maPhim))
+                                navigate('/admin/films')
+                            }
+                        }} >
                             <DeleteOutlined />
+                        </span>
+                        <NavLink className={" text-green-500 mr-3 text-[30px]"} to={`/admin/showtime/${film.maPhim}/${film.tenPhim}`}>
+                            <CalendarOutlined/>
                         </NavLink>
                     </>
                 );
@@ -125,13 +138,13 @@ function Films({}: Props) {
 
     const data: DataType[] = arrFilmDefault;
 
-    //! data lấy về từ calll api phải có thuộc tính key, khi truyền vào thuộc tính dataSource của Table Antd thì trình duyệt mới không báo lỗi "Warning: Each child in a list should have a unique "key" prop"
-    const dataWithKey = data.map((item) => {
-        return {
-            ...item,
-            key: item.maPhim, // hoặc sử dụng một trường duy nhất khác trong dữ liệu làm key
-        };
-    });
+    // //! data lấy về từ calll api phải có thuộc tính key, khi truyền vào thuộc tính dataSource của Table Antd thì trình duyệt mới không báo lỗi "Warning: Each child in a list should have a unique "key" prop"
+    // const dataWithKey = data.map((item) => {
+    //     return {
+    //         ...item,
+    //         key: item.maPhim, // hoặc sử dụng một trường duy nhất khác trong dữ liệu làm key
+    //     };
+    // });
 
     const onChange: TableProps<DataType>["onChange"] = (
         pagination,
@@ -153,11 +166,14 @@ function Films({}: Props) {
                 enterButton={<IoSearchOutline />}
                 size="large"
                 onSearch={onSearch}
+                
             />
             <Table
                 columns={columns}
-                dataSource={dataWithKey}
+                dataSource={data}
+                // dataSource={dataWithKey}
                 onChange={onChange}
+                rowKey={'maPhim'}
             />
         </div>
     );

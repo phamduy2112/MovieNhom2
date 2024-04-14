@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getProduct, layThongTinPhim, themPhimUpLoadHinh, updateFilm } from "../../service";
+import { deleteFilm, getProduct, layThongTinPhim, themPhimUpLoadHinh, updateFilm } from "../../service";
 import { useNavigate } from "react-router-dom";
 
-export const getFilmsThunk = createAsyncThunk("getFilmsThunk", async () => {
+export const getFilmsThunk = createAsyncThunk("getFilmsThunk", async (tenPhim:string='') => {
     try {
-        const data = await getProduct();
+        const data = await getProduct(tenPhim);
         return data.content;
     } catch (e: any) {
         console.log(e.response?.data);
@@ -44,6 +44,16 @@ export const updateFilmThunk = createAsyncThunk("updateFilmThunk", async (formDa
       console.log(e.response?.data);
   }
 });
+
+export const deleteFilmThunk = createAsyncThunk('deleteFilmThunk', async (maPhim:number|string)=>{
+    try {
+        const result = await deleteFilm(maPhim);
+        console.log("update", result.data.content);
+        
+    } catch (e: any) {
+        console.log(e.response?.data);
+    }
+})
 
 const initialState = {
     arrFilmDefault: [],

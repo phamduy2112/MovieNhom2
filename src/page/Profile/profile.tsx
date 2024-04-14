@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getProfile } from "../../service";
 import { getLocalStorage } from "../../utils";
 import { ACCESS_TOKEN } from "../../constants";
-import { redirect, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 type Props = {};
 

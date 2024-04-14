@@ -9,6 +9,7 @@ import { ACCESS_TOKEN } from "../../../constants";
 type TNavLinkProps = {
     isActive: boolean;
 };
+
 export function Header() {
     const activeNavLink = ({ isActive }: TNavLinkProps) => {
         return {
@@ -17,7 +18,10 @@ export function Header() {
     };
 
     //* Lấy thông tin từ redux xuống để kiểm tra người dùng đã đăng nhập hay chưa
-    const user = useAppSelector((state) => state.authReducer.user);
+    const user: any = useAppSelector((state) => state.authReducer.user);
+    const maLoaiNguoiDung = user?.maLoaiNguoiDung;
+
+    console.log(maLoaiNguoiDung);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const handlelogout = () => {
@@ -77,7 +81,7 @@ export function Header() {
                         {user ? (
                             <>
                                 <NavLink to={"/profile"}>
-                                    <div className="flex items-center gap-2 mr-5">
+                                    <div className="mr-5 flex items-center gap-2">
                                         <img
                                             src="https://i.pravatar.cc?img=2"
                                             alt=""
@@ -87,10 +91,22 @@ export function Header() {
                                     </div>
                                 </NavLink>
 
-                                <button onClick={handlelogout} className="space-x-2">
+                                <button
+                                    onClick={handlelogout}
+                                    className="space-x-2"
+                                >
                                     <i className="fa-solid fa-right-from-bracket"></i>
                                     <span>Đăng xuất</span>
                                 </button>
+
+                                {maLoaiNguoiDung === "QuanTri" ? (
+                                    <div className="self-center ml-[20px]">
+                                        <NavLink to="/admin">
+                                            <i className="fa-solid fa-user-gear"></i>
+                                            <span>Admin</span>
+                                        </NavLink>
+                                    </div>
+                                ) : null}
                             </>
                         ) : (
                             <>
