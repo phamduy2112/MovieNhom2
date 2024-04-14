@@ -6,6 +6,7 @@ import Register from "../page/Register/Register";
 import Movies from "../page/movies/Movies";
 import { Profile } from "../page/Profile/profile";
 import ProductDetails from "../page/productDetails/productDetails";
+import TicketRoom from "../page/tikectRoom/ticketRoom";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
       {
         path:'/detail/:productID',
         element:<ProductDetails />
+      },
+      {
+        path:'/ticketroom/:productID',
+        element:<TicketRoom/>
       },
       {
         path:'/login',

@@ -63,8 +63,7 @@ export const Profile = (props: Props) => {
         (Có thể chính sửa tài khoản)
       </div>
       <div className="information-item">
-        <h3 className="text-3xl">Thông tin cá nhân</h3>
-        <InformationBox__right_p>Edit</InformationBox__right_p>
+        <h3 className="text-3xl text-black">Thông tin cá nhân</h3>
         <form >
         <Input label={'Họ Tên'} type={'email'} value={profile.hoTen} disabled></Input>
        <div className="flex gap-5">

@@ -1,25 +1,9 @@
 import {
-    TContent,
-    TContentAPI,
-    THeThongRapChieu,
-    THeThongRapChieuAPI,
+   
     TLichChieu,
     TLichChieuAPI,
 } from "../../../service/DetailProdudct/DetailProduct.type";
-import { TProduct, TProductAPI } from "../../../service/Product/Product.type";
 
-export const converToDetailProduct = (list: TProductAPI): TProduct => {
-    return {
-        maPhim: list.maPhim,
-        tenPhim: list.tenPhim,
-        trailer: list.trailer,
-        hinhAnh: list.hinhAnh,
-        ngayKhoiChieu: list.ngayKhoiChieu,
-        hot: list.hot,
-        dangChieu: list.dangChieu,
-        sapChieu: list.sapChieu,
-    };
-};
 // export const converToTheaterDetailProduct = (
 //     list: TLichChieuAPI[],
 // ): TLichChieu[] => {
