@@ -1,0 +1,27 @@
+.TnormalChair{
+    background-color:black;
+width: 3.8rem;
+height: 3.8rem;
+border-radius: 1rem;
+}
+.TVipChair{
+    background-color:orange;
+    width: 3.8rem;
+    height: 3.8rem;
+    border-radius: 1rem;
+}
+.TSelectChair{
+    background-color:blue;
+    width: 3.8rem;
+    height: 3.8rem;
+    border-radius: 1rem;
+}
+.TPurchasedChair{
+    background-color:black;
+    width: 3.8rem;
+    height: 3.8rem;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

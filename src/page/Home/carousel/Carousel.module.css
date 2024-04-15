@@ -1,0 +1,27 @@
+.CaroSel{
+    position: relative;
+}
+.prev,.next{
+    border: 1px solid white;
+   width: 40px;
+   height: 40px;
+   border-radius: 50%;
+   font-size: 3.8rem;
+  line-height: 1rem;
+  opacity: 0.2;
+  transition: all .5s;
+}
+.prev{
+   position: absolute;
+   top: 50%;
+   left: 2%;
+}
+.next{
+    position: absolute;
+    top: 50%;
+    right: 2%;
+ 
+}
+.prev:hover , .next:hover{
+    opacity: 1;
+}
