@@ -1,43 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 type Props = {};
 
 import { Table, Input, Button, Popconfirm, AutoComplete } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import type { TableColumnsType, TableProps } from "antd";
-import type { SearchProps } from "antd/es/input/Search";
-import { IoSearchOutline } from "react-icons/io5";
+
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 
 import { NavLink, useNavigate } from "react-router-dom";
 import { IIFE } from "../../../utils";
-import { LayDanhSachNguoiDung } from "../../../service";
+
 import { getUsersThunk } from "../../../redux/admin/quanLyUser.slice";
 
-const { Search } = Input;
+
 
 function Users({}: Props) {
     const navigate = useNavigate();
-    const { userList } = useAppSelector(
-        (state) => state.QuanLyUserReducer,
-    );
-    
+    const { userList } = useAppSelector((state) => state.QuanLyUserReducer);
+    const [value, setValue] = useState("");
+    const [options, setOptions] = useState<DataType[]>([]);
+
     const dispatch = useAppDispatch();
     useEffect(() => {
-        IIFE(
-            async () => {
-              dispatch(getUsersThunk())
-            }
-        )
-    }, []);
+        IIFE(async () => {
+            dispatch(getUsersThunk(value));
+        });
+    }, [value]);
 
-    // console.log({ arrFilmDefault });
-
-    const onSearch: SearchProps["onSearch"] = (value, _e, info) => {
-        console.log(info?.source, value);
-        //Gọi api lấy danh sách phim
-        // dispatch(getFilmsThunk(value));
-    };
+    const userRef = useRef<any>(null);
 
     interface DataType {
         key: React.Key;
@@ -75,7 +66,7 @@ function Users({}: Props) {
             filterSearch: true,
         },
         {
-            title: "Họ Tên", 
+            title: "Họ Tên",
             dataIndex: "hoTen",
             sorter: (a, b) => {
                 let nameA = a.hoTen.toLowerCase().trim();
@@ -97,7 +88,7 @@ function Users({}: Props) {
         {
             title: "Hành động",
             dataIndex: "hanhDong",
-            render: (text, film) => {
+            render: (text) => {
                 return (
                     <div>
                         <NavLink
@@ -130,12 +121,10 @@ function Users({}: Props) {
         },
     ];
 
-    const data = userList.map((item:DataType,index)=>({
+    const data = userList.map((item: DataType, index) => ({
         ...item,
-        stt: index+1
-    }))
-
-    
+        stt: index + 1,
+    }));
 
     // //! data lấy về từ calll api phải có thuộc tính key, khi truyền vào thuộc tính dataSource của Table Antd thì trình duyệt mới không báo lỗi "Warning: Each child in a list should have a unique "key" prop"
     // const dataWithKey = data.map((item) => {
@@ -160,7 +149,7 @@ function Users({}: Props) {
             <Button
                 className="mb-4"
                 onClick={() => {
-                    navigate("/admin/createfilm");
+                    navigate("/admin/createuser");
                 }}
             >
                 Thêm người dùng
@@ -168,10 +157,26 @@ function Users({}: Props) {
             <AutoComplete
                 popupClassName="certain-category-search-dropdown"
                 popupMatchSelectWidth={500}
-                style={{ width: "100%" }}
-                // options={options}
-                onChange={value => console.log(value)}
+                options={options.map((user, index) => {
+                    return {
+                        key: index,
+                        label: user.taiKhoan,
+                        value: user.taiKhoan,
+                    };
+                })}
+                onChange={async (data) => {
+                    if (userRef.current) {
+                        clearTimeout(userRef.current);
+                    }
+                    userRef.current = setTimeout(() => {
+                        setValue(data);
+                        if (data) {
+                            setOptions(userList);
+                        }
+                    }, 700);
+                }}
                 size="large"
+                className="mb-3 w-full"
             >
                 <Input.Search size="large" placeholder="input here" />
             </AutoComplete>
