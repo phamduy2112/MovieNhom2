@@ -10,10 +10,12 @@ import Films from "../page/Admin/films/Films";
 import CreateFilm from "../page/Admin/create-film/CreateFilm";
 import EditFilm from "../page/Admin/edit-film/EditFilm";
 import CreateShowTime from "../page/Admin/create-showtime/CreateShowTime";
-import Users from "../page/Admin/users/users";
+
 import CreateUser from "../page/Admin/create-user/CreateUser";
 import ProductDetails from "../page/productDetails/productDetails";
 import TicketRoom from "../page/tikectRoom/ticketRoom";
+import Users from "../page/Admin/users/Users";
+import EditUser from "../page/Admin/edit-user/EditUser";
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +75,10 @@ export const router = createBrowserRouter([
       {
         path: 'createuser',
         element: <CreateUser/>
+      },
+      {
+        path:'edituser/:taiKhoan',
+        element: <EditUser/>
       }
     ]
   }

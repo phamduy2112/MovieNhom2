@@ -39,6 +39,7 @@ function Films({}: Props) {
         hinhAnh: string;
         tenPhim: string;
         moTa: string;
+        
     }
 
     const columns: TableColumnsType<DataType> = [

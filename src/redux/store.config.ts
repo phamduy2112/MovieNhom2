@@ -3,12 +3,14 @@ import {authReducer} from "./auth/auth.slice";
 import { QuanLyPhimReducer } from "./admin/quanLyPhim.slice";
 import { getIconTheater } from "./theater/theater.slice";
 import { getTiketRoom } from "./ticketRoom/ticket.auth";
+import { QuanLyUserReducer } from "./admin/quanLyUser.slice";
 export const store = configureStore({
     reducer:{
         authReducer,
         getIconTheater,
         getTiketRoom,
         QuanLyPhimReducer,
+        QuanLyUserReducer,
     }
 })
 

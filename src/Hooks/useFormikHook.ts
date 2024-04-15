@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { signup, signin } from "../service";
 import { useNavigate } from "react-router-dom";
 import { saveLocalStorage } from "../utils";
-import { ACCESS_TOKEN } from "../constants";
+import { ACCESS_TOKEN, GROUP_ID } from "../constants";
 import { useAppDispatch } from "../redux/hooks";
 import { getProfileThunk } from "../redux/auth/auth.slice";
 
@@ -64,6 +64,7 @@ export const useFormikHook = (type: string) => {
                         email: values.email,
                         soDt: values.sdt,
                         hoTen: values.hoTen,
+                        maNhom: GROUP_ID,
                     };
                     signup(signUpPayLoad)
                         .then((res) => {

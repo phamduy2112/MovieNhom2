@@ -3,7 +3,8 @@ type TPayloadSignup = {
     matKhau: string,
     email: string,
     soDt: string,
-    hoTen: string
+    hoTen: string,
+    maNhom:string,
 };
 
 type TPayloadSignin = Pick<TPayloadSignup, "taiKhoan" | "matKhau">;
