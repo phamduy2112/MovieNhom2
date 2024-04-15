@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { LayDanhSachNguoiDung } from '../../service';
 
-export const getUsersThunk = createAsyncThunk("getUsersThunk",async () => {
+export const getUsersThunk = createAsyncThunk("getUsersThunk",async (keyword:string) => {
     try {
-        const data = await LayDanhSachNguoiDung();
+        const data = await LayDanhSachNguoiDung(keyword);
         console.log(data.content)
         return data.content;
     } catch (e: any) {
