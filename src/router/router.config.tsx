@@ -10,6 +10,8 @@ import Films from "../page/Admin/films/Films";
 import CreateFilm from "../page/Admin/create-film/CreateFilm";
 import EditFilm from "../page/Admin/edit-film/EditFilm";
 import CreateShowTime from "../page/Admin/create-showtime/CreateShowTime";
+import Users from "../page/Admin/users/users";
+import CreateUser from "../page/Admin/create-user/CreateUser";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +59,14 @@ export const router = createBrowserRouter([
       {
         path: 'showtime/:id/:tenphim',
         element: <CreateShowTime/>
+      },
+      {
+        path: 'users',
+        element: <Users/>
+      },
+      {
+        path: 'createuser',
+        element: <CreateUser/>
       }
     ]
   }

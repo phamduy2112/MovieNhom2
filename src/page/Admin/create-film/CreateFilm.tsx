@@ -1,9 +1,17 @@
 import React, { useState } from "react";
-import { DatePicker, Form, Input, InputNumber, Radio, Switch } from "antd";
+import {
+    Button,
+    DatePicker,
+    Form,
+    Input,
+    InputNumber,
+    Radio,
+    Switch,
+} from "antd";
 import { Formik, FormikValues, useFormik, useFormikContext } from "formik";
 import moment from "moment";
 import { Key } from "antd/es/table/interface";
-import {GROUP_ID } from "../../../constants";
+import { GROUP_ID } from "../../../constants";
 import { useAppDispatch } from "../../../redux/hooks";
 import { addFilmThunk } from "../../../redux/admin/quanLyPhim.slice";
 
@@ -11,7 +19,7 @@ type Props = {};
 type SizeType = Parameters<typeof Form>[0]["size"];
 
 const CreateFilm = (props: Props) => {
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
     const [imgSrc, setImgSrc] = useState("https://picsum.photos/200/200");
     const { handleSubmit, setFieldValue, handleChange, values } = useFormik({
         initialValues: {
@@ -19,27 +27,28 @@ const CreateFilm = (props: Props) => {
             trailer: "",
             moTa: "",
             ngayKhoiChieu: "",
-            danhGia: 0,
+            danhGia: null,
             dangChieu: false,
             sapChieu: false,
             hot: false,
             hinhAnh: {},
         },
-        onSubmit: (values: FormikValues) => {
-            console.log(values)
-            values.maNhom = GROUP_ID
+        onSubmit: (values: FormikValues,{resetForm}) => {
+            console.log(values);
+            values.maNhom = GROUP_ID;
             //Biến đổi json thành formdata
             let formData = new FormData();
             for (let key in values) {
                 if (key !== "hinhAnh") {
-                    formData.append(key, values[key]);
+                    formData.append(key, values[key]);  
                 } else {
                     formData.append(key, values.hinhAnh, values.hinhAnh.name);
                 }
                 //log dữ liệu của đôi tượng formData(bình thường không thể console.log formData ra không thông thường vì dữ liệu trong forrmData có tính bảo mật)
                 console.log(key, formData.get(key));
             }
-            dispatch(addFilmThunk(formData))
+            dispatch(addFilmThunk(formData));
+            resetForm()
         },
     });
     const handleChangeInput = (e: any) => {
@@ -78,7 +87,7 @@ const CreateFilm = (props: Props) => {
             let file = e.target.files[0];
             console.log(file);
             await setFieldValue("hinhAnh", file);
-           
+
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = async (e: any) => {
@@ -93,6 +102,7 @@ const CreateFilm = (props: Props) => {
                 Thêm phim mới
             </h3>
             <Form
+                name='basic'
                 labelCol={{ span: 4 }}
                 wrapperCol={{ span: 14 }}
                 layout="horizontal"
@@ -111,14 +121,16 @@ const CreateFilm = (props: Props) => {
                     </Radio.Group>
                 </Form.Item>
 
-                <Form.Item label="Tên phim">
-                    <Input name="tenPhim" onChange={handleChange} />
+                <Form.Item
+                    label="Tên phim"
+                >
+                    <Input name="tenPhim" onChange={handleChange} value={values.tenPhim} />
                 </Form.Item>
                 <Form.Item label="Trailer">
-                    <Input name="trailer" onChange={handleChange} />
+                    <Input name="trailer" onChange={handleChange} value={values.trailer} />
                 </Form.Item>
                 <Form.Item label="Mô tả">
-                    <Input name="moTa" onChange={handleChangeInput} />
+                    <Input name="moTa" onChange={handleChangeInput} value={values.moTa} />
                 </Form.Item>
                 <Form.Item label="Ngày khởi chiếu">
                     <DatePicker
@@ -133,6 +145,7 @@ const CreateFilm = (props: Props) => {
                         min={1}
                         max={10}
                         onChange={handleChangeInputNumber}
+                        value={values.danhGia}
                     />
                 </Form.Item>
                 <Form.Item label="Đang chiếu">
@@ -154,17 +167,15 @@ const CreateFilm = (props: Props) => {
                 <Form.Item label="Hot">
                     <Switch
                         onChange={(checked) => setFieldValue("hot", checked)}
+                        checked={values.hot}
                         checkedChildren="Yes"
                         unCheckedChildren="No"
                     />
                 </Form.Item>
                 <Form.Item label="Tác vụ">
-                    <button
-                        type="submit"
-                        className="rounded-xl border-[1px] border-green-600 px-3 py-2 hover:border-transparent hover:bg-green-600 hover:text-white"
-                    >
-                        Thêm phim
-                    </button>
+                    <Button type="primary" htmlType="submit">
+                        Thêm Phim
+                    </Button>
                 </Form.Item>
                 <Form.Item label="Hình ảnh">
                     <input

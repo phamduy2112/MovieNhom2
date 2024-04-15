@@ -118,9 +118,10 @@ function Films({}: Props) {
                         <NavLink className={" text-yellow-500 mr-3 text-[30px]"} to={`/admin/editfilm/${film.maPhim}`}>
                             <EditOutlined />
                         </NavLink>
-                        <span className={" text-red-500 text-[30px] cursor-pointer mr-3"} onClick={() =>{
+                        <span className={" text-red-500 text-[30px] cursor-pointer mr-3"} onClick={async() =>{
                             if(window.confirm('Bạn có muốn xoá phim '+ film.tenPhim + "?")){
-                                dispatch(deleteFilmThunk(film.maPhim))
+                                await dispatch(deleteFilmThunk(film.maPhim))
+                                await dispatch(getFilmsThunk(''))
                                 navigate('/admin/films')
                             }
                         }} >

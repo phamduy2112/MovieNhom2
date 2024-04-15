@@ -29,6 +29,7 @@ export const addFilmThunk = createAsyncThunk("addFilmThunk", async (formData: Fo
     try {
         const result = await themPhimUpLoadHinh(formData);
         console.log("result", result.data.content);
+        alert('Thêm phim thành công')
     } catch (e: any) {
         console.log(e.response?.data);
     }

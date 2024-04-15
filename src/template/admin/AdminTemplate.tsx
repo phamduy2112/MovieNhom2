@@ -34,8 +34,8 @@ function getItem(
 
 const items: MenuItem[] = [
     getItem("Quản lý users", "sub1", <TeamOutlined />, [
-        getItem("Create user", "1"),
-        getItem("Users", "2"),
+        getItem(<NavLink to="createuser">Create user</NavLink>, "1"),
+        getItem(<NavLink to="users">Users</NavLink>, "2"),
     ]),
     getItem("Quản lý phim", "sub2",<i className="fa-solid fa-film"></i> , [
         getItem(<NavLink to="createfilm">Create film</NavLink>, "3"),
