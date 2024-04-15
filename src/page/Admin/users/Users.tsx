@@ -11,9 +11,10 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { NavLink, useNavigate } from "react-router-dom";
 import { IIFE } from "../../../utils";
 
-import { getUsersThunk } from "../../../redux/admin/quanLyUser.slice";
-
-
+import {
+    deleteUserThunk,
+    getUsersThunk,
+} from "../../../redux/admin/quanLyUser.slice";
 
 function Users({}: Props) {
     const navigate = useNavigate();
@@ -88,20 +89,21 @@ function Users({}: Props) {
         {
             title: "Hành động",
             dataIndex: "hanhDong",
-            render: (text) => {
+            render: (text, { taiKhoan }) => {
                 return (
                     <div>
                         <NavLink
                             className={" mr-3 text-[30px] text-yellow-500"}
-                            to={`/admin/`}
+                            to={`/admin/edituser/${taiKhoan}`}
                         >
                             <EditOutlined />
                         </NavLink>
 
                         <Popconfirm
                             title="Bạn có muốn xóa "
-                            onConfirm={() => {
-                                alert(1213);
+                            onConfirm={async () => {
+                                await dispatch(deleteUserThunk(taiKhoan));
+                                dispatch(getUsersThunk(""));
                             }}
                             cancelText="Huỷ"
                             okText="Chắn chắn"
@@ -125,14 +127,6 @@ function Users({}: Props) {
         ...item,
         stt: index + 1,
     }));
-
-    // //! data lấy về từ calll api phải có thuộc tính key, khi truyền vào thuộc tính dataSource của Table Antd thì trình duyệt mới không báo lỗi "Warning: Each child in a list should have a unique "key" prop"
-    // const dataWithKey = data.map((item) => {
-    //     return {
-    //         ...item,
-    //         key: item.maPhim, // hoặc sử dụng một trường duy nhất khác trong dữ liệu làm key
-    //     };
-    // });
 
     const onChange: TableProps<DataType>["onChange"] = (
         pagination,

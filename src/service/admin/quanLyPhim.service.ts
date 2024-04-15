@@ -1,7 +1,7 @@
 import { axiosWithoutAuth } from "../aios.config";
 
 export const themPhimUpLoadHinh = (payload: FormData) => {
-    return axiosWithoutAuth("/QuanLyPhim/ThemPhimUploadHinh", {
+    return axiosWithoutAuth("QuanLyPhim/ThemPhimUploadHinh", {
         method: "post",
         data: payload,
     });
@@ -21,14 +21,14 @@ export const layThongTinPhim = async (maPhim: string) => {
 };
 
 export const updateFilm = (payload: FormData) => {
-    return axiosWithoutAuth("/QuanLyPhim/CapNhatPhimUpload", {
+    return axiosWithoutAuth("QuanLyPhim/CapNhatPhimUpload", {
         method: "post",
         data: payload,
     });
 };
 
 export const deleteFilm = (maPhim:string|number) => {
-    return axiosWithoutAuth(`/QuanLyPhim/XoaPhim/?MaPhim=${maPhim}`,{
+    return axiosWithoutAuth(`QuanLyPhim/XoaPhim/?MaPhim=${maPhim}`,{
         method: 'delete',
     })
 }
