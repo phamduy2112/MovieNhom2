@@ -30,10 +30,11 @@ font-size: 1.5rem;
 
 `
 export const showTimes=styled.div`
-width: 5.5rem;
+width: 7rem;
 height: 3.5rem;
 border: 1px solid white;
 text-align: center;
 line-height: 3.3rem;
 border-radius: 0.5rem;
+text-align: center;
 `

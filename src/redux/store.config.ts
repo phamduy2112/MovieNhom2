@@ -1,9 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {authReducer} from "./auth/auth.slice";
 import { QuanLyPhimReducer } from "./admin/quanLyPhim.slice";
+import { getIconTheater } from "./theater/theater.slice";
+import { getTiketRoom } from "./ticketRoom/ticket.auth";
 export const store = configureStore({
     reducer:{
         authReducer,
+        getIconTheater,
+        getTiketRoom,
         QuanLyPhimReducer,
     }
 })

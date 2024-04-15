@@ -12,6 +12,8 @@ import EditFilm from "../page/Admin/edit-film/EditFilm";
 import CreateShowTime from "../page/Admin/create-showtime/CreateShowTime";
 import Users from "../page/Admin/users/users";
 import CreateUser from "../page/Admin/create-user/CreateUser";
+import ProductDetails from "../page/productDetails/productDetails";
+import TicketRoom from "../page/tikectRoom/ticketRoom";
 
 export const router = createBrowserRouter([
   {
@@ -23,8 +25,12 @@ export const router = createBrowserRouter([
 
       },
       {
-        path:'/movies',
-        element:<Movies />
+        path:'/detail/:productID',
+        element:<ProductDetails />
+      },
+      {
+        path:'/ticketroom/:productID',
+        element:<TicketRoom/>
       },
       {
         path:'/login',

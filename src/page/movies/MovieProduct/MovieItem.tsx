@@ -1,44 +1,47 @@
-import Movies from '../Movies';
+import { DanhSachPhimMovies } from '../../../service/Movie/Movie.type';
 import * as S from './Movie.Style';
-export const MoviesItem=()=>{
+export const MoviesItem=(props:DanhSachPhimMovies)=>{
+    console.log(props.ngayChieuGioChieu);
+    
+    
     return (
         <div>
             <S.MovieItem>
                 <a href="" className='flex gap-3'>
-                    <img style={{width:'180px',height:'28rem'}} src="https://chieuphimquocgia.com.vn/_next/image?url=http%3A%2F%2Fapiv2.chieuphimquocgia.com.vn%2FContent%2FImages%2F0017483_0.png&w=1920&q=75" alt="" />
+                    <img style={{width:'180px',height:'28rem'}} src={props.hinhAnh} alt="" />
                     <div>
-                        <S.MovieName>GODZILLA X KONG: ĐẾ CHẾ MỚI 2D - K</S.MovieName>
-                        <S.MovieDate className='date'>Khởi Chiếu:29/03/2024</S.MovieDate>
-                        <S.MovieTitle className="title">Lorem, ipsum dolor sit amet consectetur adipisicing.</S.MovieTitle>
+                        <S.MovieName>{props.tenPhim}</S.MovieName>
+                        <S.MovieDate className='date'>Khởi Chiếu:{[...new Set(new Date(props.ngayChieuGioChieu).toLocaleDateString("vi-VI"))]}</S.MovieDate>
+                        <S.MovieTitle className="title mr-2">Rap: 
+                     {props.tenRap.map((item)=>{
+                            return    <span className='mr-3'>{item}</span>
+                        })}
+                        
+                        </S.MovieTitle>
                         <div className='showtimes mt-2'>
                             <div className='mb-2'>Lịch Chiếu</div>
-                            <div className="flex gap-2 flex-wrap">
-                               <S.showTimes>
-                                <p>09:30</p>
-                            </S.showTimes>  
-                               <S.showTimes>
-                                <p>09:30</p>
-                            </S.showTimes>  
-                               <S.showTimes>
-                                <p>09:30</p>
-                            </S.showTimes>  
-                               <S.showTimes>
-                                <p>09:30</p>
-                            </S.showTimes>  
-                               <S.showTimes>
-                                <p>09:30</p>
-                            </S.showTimes>  
-                               <S.showTimes>
-                                <p>09:30</p>
-                            </S.showTimes>  
+                            <div className="flex gap-3 flex-wrap">
+                               {
+                                props.ngayChieuGioChieu.map((item)=>{
+                                    return (
+                                        <S.showTimes>
+                                            {item}
+                                        </S.showTimes>  
+                                    )
+
+                                })
+                               } 
+                     
+                               
                             </div>
                            
                         </div>
                     </div>
                 </a>
-                <S.MovieHot>Hot</S.MovieHot>
+            {props.hot?    <S.MovieHot>Hot</S.MovieHot>:''}
             
             </S.MovieItem>
         </div>
-    )
+
+        )
 }

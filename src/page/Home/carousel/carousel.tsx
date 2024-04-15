@@ -31,7 +31,7 @@ export function CarouSel() {
         return banners.map((i) => {
             return (
                 <div >
-                    <img src={i.hinhAnh} />
+                    <img src={i.hinhAnh} style={{width:'100%'}}/>
                 </div>
             );
         });
