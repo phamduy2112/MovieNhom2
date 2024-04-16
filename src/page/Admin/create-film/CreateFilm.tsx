@@ -172,11 +172,7 @@ const CreateFilm = (props: Props) => {
                         unCheckedChildren="No"
                     />
                 </Form.Item>
-                <Form.Item label="Tác vụ">
-                    <Button type="primary" htmlType="submit">
-                        Thêm Phim
-                    </Button>
-                </Form.Item>
+               
                 <Form.Item label="Hình ảnh">
                     <input
                         type="file"
@@ -186,6 +182,11 @@ const CreateFilm = (props: Props) => {
                     />
                     <br />
                     <img src={imgSrc} className="w-[200px]" alt="..." />
+                </Form.Item> 
+                <Form.Item label="Tác vụ">
+                    <Button  htmlType="submit">
+                        Thêm Phim
+                    </Button>
                 </Form.Item>
             </Form>
         </>
