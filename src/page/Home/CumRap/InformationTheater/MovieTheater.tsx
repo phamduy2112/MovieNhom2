@@ -19,14 +19,18 @@ function MovieTheater(props) {
   return (
     <div className='px-3 border w-100'>
         {
-                  props.content.map((item)=>{
-                    return item.lstCumRap.map((item)=>{
-                        return item.danhSachPhim.map((item)=>{
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  props.content.map((item: { lstCumRap: any[]; })=>{
+                    
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    return item.lstCumRap.map((item: { danhSachPhim: any[]; })=>{
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        return item.danhSachPhim.map((item: { hinhAnh: string | undefined; tenPhim: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; lstLichChieuTheoPhim: any[]; },index: React.Key | null | undefined)=>{
                           
                             
                             return   (
                                <>
-                               <div className='flex gap-2 mt-3'>
+                               <div className='flex gap-2 mt-3' key={index}>
                       <img className='w-[75px]' src={item.hinhAnh} alt="" />
                       <div className="text">
                           <h4 className='text-3xl'>{item.tenPhim}</h4>
@@ -36,7 +40,7 @@ function MovieTheater(props) {
       
                   </div>
                   <div className='showTimes mt-3'>
-                            {item.lstLichChieuTheoPhim.map((item)=>{
+                            {item.lstLichChieuTheoPhim.map((item: { ngayChieuGioChieu: moment.MomentInput; maLichChieu: any; })=>{
                                 console.log(item);
                                 
                                 return <>

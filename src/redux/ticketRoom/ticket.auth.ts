@@ -1,4 +1,4 @@
-import { createSlice, configureStore } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 const GetTiketRoom = createSlice({
     name: 'getTiket',
     initialState: {
@@ -7,7 +7,7 @@ const GetTiketRoom = createSlice({
     },
     reducers: {
         setTicketChair:(state, { payload }) => {
-           const index= state.tiket.findIndex((item)=>item.maGhe==payload.maGhe);
+           const index= state.tiket.findIndex((item:never)=>item.maGhe==payload.maGhe);
             if(index!==-1){
 
                state.tiket.splice(index,1);

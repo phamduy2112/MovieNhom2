@@ -1,4 +1,3 @@
-import React from 'react'
 import IconTheater from './IconTheater/iconTheater';
 import InformationTheater from './InformationTheater/informationTheater';
 

@@ -7,7 +7,7 @@ export const getShowTimesTheater=async(heThongRap:string,maNhomPhim:string='GP04
 
         const data=resp.data;
         return data
-    }catch(e){
+    }catch(e:any){
         throw new Error(e);
     }
 }

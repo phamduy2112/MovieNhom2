@@ -1,4 +1,3 @@
-import { Fragment } from "react/jsx-runtime";
 import S from './Footer.module.css'
 import { FaFacebookF,FaTiktok,FaInstagram  } from "react-icons/fa";
 

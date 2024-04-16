@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { deleteFilm, getProduct, layThongTinPhim, themPhimUpLoadHinh, updateFilm } from "../../service";
-import { useNavigate } from "react-router-dom";
 
 export const getFilmsThunk = createAsyncThunk("getFilmsThunk", async (tenPhim:string='') => {
     try {

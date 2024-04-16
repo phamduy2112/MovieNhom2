@@ -1,4 +1,3 @@
-import React from "react";
 import S from "./Input.module.css";
 
 export function Input(props: any) {

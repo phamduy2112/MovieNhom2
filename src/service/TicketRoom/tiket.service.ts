@@ -8,7 +8,7 @@ export const getTiketRoom=async(MaLichChieu:string='16262')=>{
 
         const data=resp.data;
         return data
-    }catch(e){
+    }catch(e:any){
         throw new Error(e);
     }
 }

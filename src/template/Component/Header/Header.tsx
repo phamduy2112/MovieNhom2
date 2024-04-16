@@ -1,4 +1,4 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import S from "./Header.module.css";
 import { SButtonPrimary } from "../Style/Button";
@@ -19,6 +19,7 @@ export function Header() {
 
     //* Lấy thông tin từ redux xuống để kiểm tra người dùng đã đăng nhập hay chưa
     const user: any = useAppSelector((state) => state.authReducer.user);
+    
     const maLoaiNguoiDung = user?.maLoaiNguoiDung;
 
     console.log(maLoaiNguoiDung);

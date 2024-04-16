@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { Outlet, useParams } from 'react-router-dom'
-import { TProduct } from '../../service/Product/Product.type';
+import {  useParams } from 'react-router-dom'
+
 import { IIFE } from '../../utils';
-import { getDetailProduct } from '../../service/Product/Product.service';
-import { SButtonPrimary } from '../../template/Component/Style/Button';
 import IconTheater from '../Home/CumRap/IconTheater/iconTheater';
-import { converToDetailProduct, converToTheaterDetailProduct } from './Helper';
 
 import { getDetailTheaterProduct } from '../../service/DetailProdudct/DetailProduct.service';
-import { THeThongRapChieu, TLichChieu } from '../../service/DetailProdudct/DetailProduct.type';
+import { TLichChieu } from '../../service/DetailProdudct/DetailProduct.type';
 import moment from 'moment';
+import { converToTheaterDetailProduct } from './Helper';
+import { SButtonPrimary } from '../../template/Component/Style/Button';
 
-function ProductDetails(props) {
+function ProductDetails() {
     const { productID } = useParams();
-    const [movie,setMovie]=useState({});
-    const [movieTheater,setMovieTheater] = useState({});
+    const [movie,setMovie]=useState<TLichChieu>({});
+    const [movieTheater,setMovieTheater] = useState<TLichChieu>({});
     const [movieTheaterDetail,setMovieTheaterDetail]=useState<TLichChieu>({});
     // const [movieTheaterDetail,setMovieTheaterDetail]=useState<any[]>([]);
 
@@ -22,15 +21,15 @@ function ProductDetails(props) {
       IIFE(async()=>{
         try{
       
-          const data=await getDetailProduct(productID);
+        
           const dataTheater=await getDetailTheaterProduct(productID);
           
           if(dataTheater?.message==='Xử lý thành công!'){
-            // const content=data.content;
+          
             const contentTheater:TLichChieu =dataTheater.content;
          
             console.log("data convert: ",converToTheaterDetailProduct(contentTheater));
-            // setMovieTheaterDetail(converToTheaterDetailProduct(contentTheater))
+            
             setMovieTheaterDetail(contentTheater)
             if(contentTheater.heThongRapChieu[0]){
               setMovieTheater(contentTheater.heThongRapChieu[0].cumRapChieu[0]);
@@ -115,7 +114,7 @@ function ProductDetails(props) {
                   <div className='mt-3'>
                          <SButtonPrimary width='80px' style={{lineHeight:'3.2rem'}} height={32}  background='transparent' border='red' borderRadius={.6}>{
                        
-                       moment(movie.ngayChieuGioChieu).format('kk:mm:ss')
+                       moment(movie.ngayKhoiChieu).format('kk:mm:ss')
                           
                 
                          

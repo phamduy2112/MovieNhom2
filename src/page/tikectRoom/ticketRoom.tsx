@@ -6,11 +6,11 @@ import {
     TVipChair,
     TinfoTicket,
     TnormalChair,
-    normalChair,
+
 } from "./ticketRoom.style";
-import { SButtonPrimary } from "../../template/Component/Style/Button";
+
 import { tiketRoom } from "../../service/TicketRoom/tiket.type";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { IIFE } from "../../utils";
 import { getTiketRoom } from "../../service/TicketRoom/tiket.service";
 import { converToTiketRoom } from "./helper/converToTikectRoom";
@@ -18,15 +18,15 @@ import T from "./ticketRoom.module.css";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import LoadPage from "../../template/Component/LoadPage/LoadPage";
 import { setTicketChair } from "../../redux/ticketRoom/ticket.auth";
-import { Button,Modal } from "antd";
+
 import Model from "./Modal/Model";
 function TicketRoom() {
     const dispatch = useAppDispatch();
 
     const { productID } = useParams();
     const [load, setLoad] = useState(true);
-    const user = useAppSelector((state) => state.authReducer.user);
-    const getTicket = useAppSelector((state) => state.getTiketRoom.tiket);
+    const user:any = useAppSelector((state) => state.authReducer.user);
+    const getTicket:any = useAppSelector((state) => state.getTiketRoom.tiket);
 
     const [ticket, setTicket] = useState<tiketRoom[]>({});
 
@@ -35,8 +35,8 @@ function TicketRoom() {
             try {
                 const data = await getTiketRoom(productID);
                 if (data?.message === "Xử lý thành công!") {
-                    const content: tiketRoom = data.content;
-                    console.log(content);
+                    const content = data.content;
+                
                     setTicket(converToTiketRoom(content));
                 }
             } catch (e) {
@@ -53,13 +53,13 @@ function TicketRoom() {
     console.log(getTicket);
     
     const renderSeat = () => {
-        return ticket?.danhSachGhe.map((item, index) => {
+        return ticket?.danhSachGhe.map((item:any, index:any) => {
             const vipChair = item.loaiGhe == "Vip" ? `${T["TVipChair"]}` : "";
 
             const purchasedChair =
                 item.daDat === true ? ` ${T["TPurchasedChair"]}` : "";
                 let classSelectChair=``;
-                const indexChair= getTicket.findIndex((itemChair)=>itemChair.maGhe==item.maGhe);
+                const indexChair= getTicket.findIndex((itemChair:any)=>itemChair.maGhe==item.maGhe);
                 if(indexChair!==-1){
     
                   classSelectChair=`${T["TSelectChair"]}`
@@ -67,7 +67,7 @@ function TicketRoom() {
           
                 }
             return (
-                <Fragment>
+                <Fragment key={index}>
                     <button
                         className={`${T["TnormalChair"]} ${classSelectChair}  ${vipChair} ${purchasedChair}`}
                         onClick={()=>{
@@ -94,11 +94,11 @@ function TicketRoom() {
             );
         });
     };
-    const total=getTicket.reduce((total,item,index)=>{
+    const total=getTicket.reduce((total:any,item:any)=>{
         return total+=item.giaVe
     },0).toLocaleString();
 
-    const getTicketsRoom=getTicket.map((item,index)=>{
+    const getTicketsRoom=getTicket.map((item:any,index:any)=>{
         if(index==getTicket.length - 1){
             return item.tenGhe;
         }else{

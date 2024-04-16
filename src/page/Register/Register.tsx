@@ -1,4 +1,3 @@
-import React from "react";
 import { Input } from "../../template/Component/Input/Input";
 import { NavLink } from "react-router-dom";
 import { SButtonPrimary } from "../../template/Component/Style/Button";
@@ -62,7 +61,7 @@ export default function Register() {
                     className="mt-4"
                     width={"100%"}
                     height={40}
-                    border={2}
+                    borderRadius={2}
                     type="submit"
                 >
                     Đăng kí ngay
@@ -73,7 +72,7 @@ export default function Register() {
                 <SButtonPrimary
                     width={"50%"}
                     height={40}
-                    border={1}
+                    borderRadius={1}
                     background="blue"
                 >
                     <div className="flex content-center justify-center gap-3 text-center">
@@ -84,7 +83,7 @@ export default function Register() {
                 <SButtonPrimary
                     width={"50%"}
                     height={40}
-                    border={1}
+                    borderRadius={1}
                     background="orange"
                 >
                     <div className="flex content-center justify-center gap-3 text-center">

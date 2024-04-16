@@ -37,7 +37,7 @@ export const Profile = (props: Props) => {
 
     return (
         <div className="mt-28">
-    <div className="container" className="text-black">
+    <div className="container text-black">
     <Information>
   <div className="information-box flex gap-5">
     <InformationBox__left>

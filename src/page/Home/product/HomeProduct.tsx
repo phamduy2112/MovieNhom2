@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import CartItem from '../../../listCard/Card/CardItem'
 import { TProduct } from '../../../service/Product/Product.type'
 import { IIFE } from '../../../utils';
 import { getProduct } from '../../../service/Product/Product.service';
@@ -43,7 +42,7 @@ const  backgroundSC=active.sapChieu ?"linear-gradient(210deg,#fe6969,#e30713)" :
     <div className='container'>
         <div className='flex my-3'>
             
-           <SButtonPrimary width='150px' border={0} 
+           <SButtonPrimary width='150px' borderRadius={0} 
            background={backgroundDC}
            onClick={()=>{
             setType(true),
@@ -56,7 +55,7 @@ const  backgroundSC=active.sapChieu ?"linear-gradient(210deg,#fe6969,#e30713)" :
            }
            
            }>Phim Đang Chiếu</SButtonPrimary>
-           <SButtonPrimary width='150px' border={0}  
+           <SButtonPrimary width='150px' borderRadius={0}  
            style={{lineHeight:'3.5rem'}}
            background={backgroundSC}
            onClick={()=>{
@@ -80,7 +79,7 @@ const  backgroundSC=active.sapChieu ?"linear-gradient(210deg,#fe6969,#e30713)" :
 
     </div>
     <div className='flex justify-center items-center my-4'>
-    <SButtonPrimary width='100px' border={.5}    
+    <SButtonPrimary width='100px' borderRadius={.5}    
     style={{lineHeight:'3.5rem'}}>Xem Thêm</SButtonPrimary>
 
     </div>

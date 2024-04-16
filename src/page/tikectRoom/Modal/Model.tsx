@@ -1,14 +1,14 @@
 import { useState } from "react";
 
 import React from 'react'
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 import { SButtonPrimary } from "../../../template/Component/Style/Button";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../redux/hooks";
 
-function Model(props) {
+function Model(props: { ticket: { thongTinPhim: { tenPhim: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; ngayChieu: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }; }; getTicketsRoom: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; total: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) {
   const navigate = useNavigate();
-  const user = useAppSelector((state) => state.authReducer.user);
+  const user:any = useAppSelector((state) => state.authReducer.user);
 
 const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {

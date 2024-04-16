@@ -7,7 +7,7 @@ export const getBanner=async ()=>{
         const resp=await axiosWithoutAuth('QuanLyPhim/LayDanhSachBanner');
         const data=resp.data;
         return data
-    }catch(e){
+    }catch(e:any){
         throw new Error(e);
     }
 }

@@ -18,7 +18,7 @@ export const getDetailProduct=async(idProduct:string='')=>{
         const resp=await axiosWithoutAuth(`QuanLyPhim/LayThongTinPhim?MaPhim=${idProduct}`);
         const data=resp.data;
         return data
-    }catch(e){
+    }catch(e:any){
         throw new Error(e);
     }
 }

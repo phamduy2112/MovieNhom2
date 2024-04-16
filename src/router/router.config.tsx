@@ -3,7 +3,6 @@ import UserTemplate from "../template/user/UserTemplate";
 import Home from "../page/Home/Home";
 import Login from "../page/Login/Login";
 import Register from "../page/Register/Register";
-import Movies from "../page/movies/Movies";
 import { Profile } from "../page/Profile/profile";
 import AdminTemplate from "../template/admin/AdminTemplate";
 import Films from "../page/Admin/films/Films";
