@@ -57,6 +57,7 @@ const  backgroundSC=active.sapChieu ?"linear-gradient(210deg,#fe6969,#e30713)" :
            
            }>Phim Đang Chiếu</SButtonPrimary>
            <SButtonPrimary width='150px' border={0}  
+           style={{lineHeight:'3.5rem'}}
            background={backgroundSC}
            onClick={()=>{
             setType(false),
@@ -79,7 +80,8 @@ const  backgroundSC=active.sapChieu ?"linear-gradient(210deg,#fe6969,#e30713)" :
 
     </div>
     <div className='flex justify-center items-center my-4'>
-    <SButtonPrimary width='100px' border={.5}>Xem Thêm</SButtonPrimary>
+    <SButtonPrimary width='100px' border={.5}    
+    style={{lineHeight:'3.5rem'}}>Xem Thêm</SButtonPrimary>
 
     </div>
     </div>
