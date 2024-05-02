@@ -1,5 +1,5 @@
 import React, {  useEffect, useState } from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
    
     TeamOutlined,
@@ -13,6 +13,8 @@ import { ACCESS_TOKEN } from "../../constants";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 import { getProfileThunk, setUser } from "../../redux/auth/auth.slice";
+import { useTransition,animated } from "@react-spring/web";
+import { duration } from "moment";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -44,6 +46,13 @@ const items: MenuItem[] = [
 ];
 
 const AdminTemplate: React.FC = () => {
+    const location = useLocation()
+    const transitions = useTransition(location, {
+        from: { opacity: 0, transform: 'translate3d(100vw, 0, 0)' },
+        enter: { opacity: 1, transform: 'translate3d(0, 0, 0)' },
+        leave: { opacity: 0, transform: 'translate3d(-20vw, 0, 0)' },
+        config: {duration:1000}
+    });
     const dispatch = useAppDispatch();
     const user: any = useAppSelector((state) => state.authReducer.user);
     const maLoaiNguoiDung = user?.maLoaiNguoiDung;
@@ -137,7 +146,15 @@ const AdminTemplate: React.FC = () => {
                             borderRadius: borderRadiusLG,
                         }}
                     >
-                        <Outlet />
+                        {transitions((props)=>{
+                            return(
+                                <animated.div style={props}>
+                                    <Outlet/>
+                                </animated.div>
+                            )
+                        })}
+
+                        
                     </div>
                 </Content>
                 <Footer style={{ textAlign: "center" }}>
