@@ -1,11 +1,11 @@
-import React, {  useEffect, useState } from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import {
-   
-    TeamOutlined,
-
-    DownOutlined,
-} from "@ant-design/icons";
+    NavLink,
+    Outlet,
+    useNavigate,
+    useLocation,
+} from "react-router-dom";
+import { TeamOutlined, DownOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Breadcrumb, Dropdown, Layout, Menu, Space, theme } from "antd";
 import { getLocalStorage, removeLocalStorage } from "../../utils";
@@ -13,6 +13,9 @@ import { ACCESS_TOKEN } from "../../constants";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 import { getProfileThunk, setUser } from "../../redux/auth/auth.slice";
+//FROM React - Spring
+import { useTransition, animated } from "react-spring";
+
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -37,7 +40,7 @@ const items: MenuItem[] = [
         getItem(<NavLink to="createuser">Create user</NavLink>, "1"),
         getItem(<NavLink to="users">Users</NavLink>, "2"),
     ]),
-    getItem("Quản lý phim", "sub2",<i className="fa-solid fa-film"></i> , [
+    getItem("Quản lý phim", "sub2", <i className="fa-solid fa-film"></i>, [
         getItem(<NavLink to="createfilm">Create film</NavLink>, "3"),
         getItem(<NavLink to="films">Films</NavLink>, "4"),
     ]),
@@ -49,9 +52,17 @@ const AdminTemplate: React.FC = () => {
     const maLoaiNguoiDung = user?.maLoaiNguoiDung;
     const navigate = useNavigate();
     console.log(user);
+    const location = useLocation();
+    const transitions = useTransition(location, {
+        from: { opacity: 0, transform: "translate3d(100vw, 0px, 0)", display: "block" },
+        enter: { opacity: 1, transform: "translate3d(0, 0, 0)", display: "block" },
+        leave: { opacity: 0, transform: "translate3d(-20vw, 0, 0)", display: "none" },
+    });
+
     useEffect(() => {
         dispatch(getProfileThunk());
     }, []);
+
 
     const handlelogout = () => {
         dispatch(setUser(null));
@@ -88,8 +99,8 @@ const AdminTemplate: React.FC = () => {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
 
-    if(maLoaiNguoiDung !== 'QuanTri'){
-        return null
+    if (maLoaiNguoiDung !== "QuanTri") {
+        return null;
     }
     return (
         <Layout style={{ minHeight: "100vh" }}>
@@ -114,9 +125,7 @@ const AdminTemplate: React.FC = () => {
                                 <Space>
                                     <div className="space-x-2">
                                         <i className="fa-regular fa-user rounded-full bg-slate-200 p-3"></i>
-                                        <span>
-                                            {user.taiKhoan}
-                                        </span>
+                                        <span>{user.taiKhoan}</span>
                                     </div>
                                     <DownOutlined />
                                 </Space>
@@ -137,7 +146,17 @@ const AdminTemplate: React.FC = () => {
                             borderRadius: borderRadiusLG,
                         }}
                     >
-                        <Outlet />
+                        {/* <Outlet /> */}
+                        {transitions((props, item) => {
+                            console.log(item.pathname);
+                            return (
+                                <animated.div style={props} key={item.pathname}>
+                                    <div className={item.pathname}>
+                                        <Outlet />
+                                    </div>
+                                </animated.div>
+                            );
+                        })}
                     </div>
                 </Content>
                 <Footer style={{ textAlign: "center" }}>
